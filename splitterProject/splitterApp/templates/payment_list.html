@@ -1,0 +1,18 @@
+{% extends "base.html" %}
+
+{% block content %}
+<h2>My Payments</h2>
+<a href="{% url 'export_payments_csv' %}" class="btn btn-primary mb-3">Download CSV</a>
+<ul class="list-group">
+    {% for payment in payments %}
+        <li class="list-group-item">
+            {{ payment.paid_by }} paid {{ payment.amount }} to {{ payment.paid_to }}
+            {% if not payment.settled %}
+                <a href="{% url 'settle_payment' payment.id %}" class="btn btn-sm btn-success">Mark as Settled</a>
+            {% else %}
+                <span class="badge badge-success">Settled</span>
+            {% endif %}
+        </li>
+    {% endfor %}
+</ul>
+{% endblock %}

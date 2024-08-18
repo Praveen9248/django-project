@@ -1,0 +1,34 @@
+{% extends "base.html" %}
+{% load custom_filters %}
+
+{% block content %}
+  <h2>Group: {{ group.name }}</h2>
+  
+  <h3>Members</h3>
+  <ul class="list-group">
+    {% for member in group.members.all %}
+      <li class="list-group-item d-flex justify-content-between align-items-center">
+        {{ member.username }}
+        <span class="badge badge-primary badge-pill">
+          {% with balance=balances.member.id %}
+            {% if balance >= 0 %}
+              You are owed: ${{ balance }}
+            {% else %}
+              You owe: ${{ balance|absolute }}
+            {% endif %}
+          {% endwith %}
+        </span>
+      </li>
+    {% endfor %}
+  </ul>
+  
+  <h3 class="mt-4">Expenses</h3>
+  <ul class="list-group">
+    {% for expense in expenses %}
+      <li class="list-group-item">
+        <strong>{{ expense.description }}</strong> - ${{ expense.amount }} 
+        <span class="text-muted">(Paid by: {{ expense.payer.username }})</span>
+      </li>
+    {% endfor %}
+  </ul>
+{% endblock %}

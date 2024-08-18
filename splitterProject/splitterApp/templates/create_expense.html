@@ -1,0 +1,15 @@
+{% extends 'base.html' %}
+
+{% block content %}
+  <h2>Create New Expense</h2>
+  <form method="post">
+    {% csrf_token %}
+    {{ form.group.label_tag }} {{ form.group }}
+    {{ form.amount.label_tag }} {{ form.amount }}
+    {{ form.description.label_tag }} {{ form.description }}
+    <br>
+    {{ form.split_method.label_tag }} {{ form.split_method }}
+
+    <button type="submit">Create Expense</button>
+  </form>
+{% endblock %}

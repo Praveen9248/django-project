@@ -1,0 +1,12 @@
+{% extends "base.html" %}
+
+{% block content %}
+<h2>My Expenses</h2>
+<ul class="list-group">
+    {% for expense in expenses %}
+        <li class="list-group-item">
+            {{ expense.description }} - {{ expense.amount }} ({{ expense.created_at }})
+        </li>
+    {% endfor %}
+</ul>
+{% endblock %}
